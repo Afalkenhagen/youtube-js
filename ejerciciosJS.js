@@ -528,13 +528,46 @@ console.log("Ejercicios de Lógica de Programación ( 4 / 10 )");
       if (typeof monto !== "number") return console.error(`El valor "${monto}" ingresado, NO es un numero`);
       if (monto=== 0) return console.error("El monto no puede ser 0");
       if (Math.sign(monto)=== -1) return console.error("El monto no puede ser negativo");
-      return console.info (`${monto}-${descuento}% = ${monto- ((monto*descuento)/100)} `);
+      if  (typeof descuento !== "number") return console.error(`El valor "${descuento}" ingresado, NO es un numero`);
+      if (Math.sign(descuento)=== -1) return console.error("El descuento no puede ser negativo");
+      return console.info (`$${monto}-${descuento}% = $${monto- ((monto*descuento)/100)} `);
     }
 
+    aplicarDescuento();
+    aplicarDescuento("200");
+    aplicarDescuento(0);
+    aplicarDescuento(-1000);
+    aplicarDescuento(1000,"20");
+    aplicarDescuento(1000,-20);
+    aplicarDescuento(1000); //si no indico ningun descuento se aplica cero 0
+    aplicarDescuento(1000, 25);
 
     /* 17) Programa una función que dada una fecha válida determine cuantos años han pasado hasta el día de hoy, pe. miFuncion(new Date(1984,4,23)) devolverá 35 años (en 2020) */
+    const calcularAnios=(fecha=undefined)=>{
+      if (fecha === undefined) return console.warn("No ingresaste la fecha");
+      if (!(fecha instanceof Date)) return console.error("El valor ingresado no es una fecha valida");
+      let hoyMenosFecha = new Date().getTime()-fecha.getTime(),
+      aniosEnMS = 1000 * 60 * 60 * 24 * 360
+      aniosHumanos = Math.floor(hoyMenosFecha/aniosEnMS);
+      return (Math.sign(aniosHumanos)=== -1)
+      ? console.info(`Faltan ${Math.abs(aniosHumanos)} años para el ${fecha.getFullYear()}`)
+      :(Math.sign(aniosHumanos) === 1)
+        ?console.info(`Han pasado ${aniosHumanos} años, desde ${fecha.getFullYear()}.`)
+        :console.info(`Estamos en el año actual ${fecha.getFullYear()}.`)
+    }
+
+    calcularAnios();
+    calcularAnios({});
+    calcularAnios(false);
+    calcularAnios(new Date());
+    calcularAnios(new Date(1984,4,23));
+    calcularAnios(new Date(1884,4,23));
+    calcularAnios(new Date(2084,4,23));
 
 
+    //comentar el console.clear para leer los resultados de arriba.
+    console.clear();
+    console.log("Ejercicios de Lógica de Programación ( 6 / 10 )");
 
     /* 18) Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5 */
 
