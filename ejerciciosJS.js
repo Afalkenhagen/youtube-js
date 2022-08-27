@@ -570,12 +570,42 @@ console.log("Ejercicios de Lógica de Programación ( 4 / 10 )");
     console.log("Ejercicios de Lógica de Programación ( 6 / 10 )");
 
     /* 18) Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5 */
+    const contarLetras= (cadena= "") =>{
+      if(!cadena) return console.warn("No ingresaste una cadena de texto");
+      if(typeof cadena !== "string") return console.error(`El valor "${cadena}" ingresado, NO es una cadena de texto`);
+      let vocales=0, consonantes=0;
+      cadena=cadena.toLocaleLowerCase();
+      for (let letra of cadena){
+        if (/[aeiouáéíóúü]/.test(letra)) vocales++;
+        if (/[bcdfghjklmnñpqrstvwxyz]/.test(letra)) consonantes++;
+      }
+      return console.info(
+        {cadena,
+        vocales,
+        consonantes}
+      )
+    }
+    contarLetras();
+    contarLetras(3);
+    contarLetras("Hola Mundo");
+    contarLetras("Ñoño");
+    contarLetras("Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure excepturi enim ex reprehenderit, sapiente debitis optio, totam reiciendis modi dolorem hic aliquam maiores et nobis magnam blanditiis! Saepe, eaque dolorem!");
 
 
 
     /* 19) Programa una función que valide que un texto sea un nombre válido, pe. miFuncion("Jonathan MirCha") devolverá verdadero */
-
-
+    const validarNombre=(nombre="")=>{
+      if(!nombre) return console.warn("No ingresaste un nombre");
+      if(typeof nombre !== "string") return console.error(`El valor "${nombre}" ingresado, NO es una cadena de texto`);
+      let expReg= /^[A-Za-zÑñÁÉÍÓÚáéíóúÜü\s]+$/g.test(nombre);
+      return (expReg)
+      ?console.info(`"${nombre}", es un nombre valido`)
+      :console.warn(`"${nombre}", NO es un nombre valido`)
+    }
+    validarNombre();
+    validarNombre(3);
+    validarNombre("Jonathan MirCha");
+    validarNombre("Jonathan MirCha, 35");
 
     /* 20) Programa una función que valide que un texto sea un email válido, pe. miFuncion("jonmircha@gmail.com") devolverá verdadero */
 
