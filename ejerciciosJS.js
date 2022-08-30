@@ -600,7 +600,7 @@ console.log("Ejercicios de Lógica de Programación ( 4 / 10 )");
       let expReg= /^[A-Za-zÑñÁÉÍÓÚáéíóúÜü\s]+$/g.test(nombre);
       return (expReg)
       ?console.info(`"${nombre}", es un nombre valido`)
-      :console.warn(`"${nombre}", NO es un nombre valido`)
+      :console.warn(`"${nombre}", NO es un nombre valido`);
     }
     validarNombre();
     validarNombre(3);
@@ -608,6 +608,42 @@ console.log("Ejercicios de Lógica de Programación ( 4 / 10 )");
     validarNombre("Jonathan MirCha, 35");
 
     /* 20) Programa una función que valide que un texto sea un email válido, pe. miFuncion("jonmircha@gmail.com") devolverá verdadero */
+    const validarEmail=(email="")=>{
+      if(!email) return console.warn("No ingresaste un email");
+      if(typeof email !== "string") return console.error(`El valor "${email}" ingresado, NO es una cadena de texto`);
+      //let expReg= /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/i.test(email);
+      //esta es mejor
+      let expReg= /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/i.test(email);
+      return(expReg)
+      ?console.info(`"${email}", es un email valido`)
+      :console.warn(`"${email}", NO es un email valido`);
+    }
+    validarEmail();
+    validarEmail(34);
+    validarEmail("jon,mir,cha@gmail.com");
+    validarEmail("jonmircha@gmail.com");
+
+    /*Fusion 19 y 20*/
+    const validarPatron=(cadena="", patron=undefined)=>{
+      if(!cadena) return console.warn("No ingresaste una cadena de texto a evaluar");
+      if(typeof cadena !== "string") return console.error(`El valor "${cadena}" ingresado, NO es una cadena de texto`);
+      //let expReg= /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/i.test(email);
+      //esta es mejor
+      if(patron===undefined) return console.warn("No ingresaste un patron a evaluar");
+      if(!patron instanceof RegExp) return console.error(`El valor "${patron}" ingresado, NO es una expresion regular`);
+
+      let expReg= patron.test(cadena);
+      return(expReg)
+      ?console.info(`"${cadena}", cumple con el patron ingresado`)
+      :console.warn(`"${cadena}", NO cumple con el patron ingresado`);
+    }
+    validarPatron();
+    validarPatron({});
+    validarPatron("Hola mundo");
+    validarPatron("Hola mundo", "hola");
+    //validarPatron("Hola mundo", [1,2,3]);
+
+
 
 
 
