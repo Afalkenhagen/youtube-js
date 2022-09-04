@@ -627,10 +627,8 @@ console.log("Ejercicios de Lógica de Programación ( 4 / 10 )");
     const validarPatron=(cadena="", patron=undefined)=>{
       if(!cadena) return console.warn("No ingresaste una cadena de texto a evaluar");
       if(typeof cadena !== "string") return console.error(`El valor "${cadena}" ingresado, NO es una cadena de texto`);
-      //let expReg= /[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})/i.test(email);
-      //esta es mejor
       if(patron===undefined) return console.warn("No ingresaste un patron a evaluar");
-      if(!patron instanceof RegExp) return console.error(`El valor "${patron}" ingresado, NO es una expresion regular`);
+      if(!(patron instanceof RegExp)) return console.error(`El valor "${patron}" ingresado, NO es una expresion regular`);
 
       let expReg= patron.test(cadena);
       return(expReg)
@@ -641,14 +639,37 @@ console.log("Ejercicios de Lógica de Programación ( 4 / 10 )");
     validarPatron({});
     validarPatron("Hola mundo");
     validarPatron("Hola mundo", "hola");
-    //validarPatron("Hola mundo", [1,2,3]);
+    validarPatron("Hola mundo", [1,2,3]);
+    validarPatron("Jonathan MirCha", /^[A-Za-zÑñÁÉÍÓÚáéíóúÜü\s]+$/g);
+    validarPatron("Jonathan MirCha 19", /^[A-Za-zÑñÁÉÍÓÚáéíóúÜü\s]+$/g);
+    validarPatron("jonmircha@gmail", new RegExp(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/i));
+    validarPatron("jonmircha@gmail.com", new RegExp(/^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/i));
 
 
-
+    //comentar el console.clear para leer los resultados de arriba.
+    console.clear();
+    console.log("Ejercicios de Lógica de Programación ( 7 / 10 )");
 
 
     /* 21) Programa una función que dado un array numérico devuelve otro array con los números elevados al cuadrado, pe. mi_funcion([1, 4, 5]) devolverá [1, 16, 25] */
+    const devolverCuadrados= (arr = undefined) =>{
+      if(arr===undefined) return console.warn("No ingresaste un arreglo de numeros");
+      if(!(arr instanceof Array)) return console.error("El valor que ingresaste no es un arreglo");
+      if(arr.length===0)return console.error("El arreglo esta vacio");
+      for (let num of arr) {
+        if(typeof num !== "number") return console.error(`El valor "${num}" ingresado, NO es un numero`);
+      }
+      const newArr= arr.map(el => el*el);
+      return console.info(`Arreglo original: ${arr}, arreglo elevado al cuadrado: ${newArr}`);
+    }
 
+    devolverCuadrados();
+    devolverCuadrados(true);
+    devolverCuadrados({});
+    devolverCuadrados([]);
+    devolverCuadrados([1,"3", 4, {}]);
+    devolverCuadrados([1,4, {}]);
+    devolverCuadrados([1,4,8]);
 
 
     /* 22) Programa una función que dado un array devuelva el número mas alto y el más bajo de dicho array, pe. miFuncion([1, 4, 5, 99, -60]) devolverá [99, -60] */
