@@ -888,12 +888,39 @@ class Pelicula{
     this.calificacion = calificacion;
 
     this.validarIMDB(id);
+    this.validarTitulo(titulo)
+    this.validarDirector(director)
   }
   validarCadena(propidad,valor){
     if(!valor) return console.warn(`${propidad} "${valor}" esta vacio`);
     if(typeof valor !== "string") return console.error(`${propidad} "${valor}" ingresado, NO es una cadena de texto`);
+    return true;
   }
-  validarIMDB(id){
+  validarLongitudCadena(propidad,valor, longitud){
+    if(valor.length > longitud) return console.error(`${propidad} "${valor}" excede el numero de caracteres permitidos (${longitud}).`);
+    
+    return true;
+  }
 
+  validarIMDB(id){
+    if (this.validarCadena("IMDB id", id))
+      if (!/^([a-z]){2}([0-9]){7}$/.test(id))
+        return console.error(`IMBD id "${id}" no es valido, debe tener 9 caracteres, los 2 primeros letras minusculas, los 7 restantes numeros`);
+    }
+  validarTitulo(titulo){
+    if (this.validarCadena("Titulo", titulo))
+      this.validarLongitudCadena("Titulo",titulo,100);
+    }
+  validarDirector(director){
+    if (this.validarCadena("Director", director))
+      this.validarLongitudCadena("Director",director,50);
+    }
   }
-}
+
+  const peli= new Pelicula({
+    id: "tt1234567",
+    titulo: "Titulo de la peli",
+    director: "Director de la peli"
+
+  });
+
