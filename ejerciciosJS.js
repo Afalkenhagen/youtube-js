@@ -861,15 +861,15 @@ console.log("Ejercicios de Lógica de Programación ( 9 / 10 )");
 
 /* 27) Programa una clase llamada Pelicula.
         La clase recibirá un objeto al momento de instanciarse con los siguentes datos: id de la película en IMDB, titulo, director, año de estreno, país o países de origen, géneros y calificación en IMBD.
-          - Todos los datos del objeto son obligatorios.
-          - Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 7 restantes números.
-          - Valida que el título no rebase los 100 caracteres.
-          - Valida que el director no rebase los 50 caracteres.
-          - Valida que el año de estreno sea un número entero de 4 dígitos.
-          - Valida que el país o paises sea introducidos en forma de arreglo.
-          - Valida que los géneros sean introducidos en forma de arreglo.
+    - Todos los datos del objeto son obligatorios.
+    - Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 7 restantes números.
+    - Valida que el título no rebase los 100 caracteres.
+    - Valida que el director no rebase los 50 caracteres.
+    - Valida que el año de estreno sea un número entero de 4 dígitos.
+    - Valida que el país o paises sea introducidos en forma de arreglo.
+    - Valida que los géneros sean introducidos en forma de arreglo.
           - Valida que los géneros introducidos esten dentro de los géneros aceptados*.
-          - Crea un método estático que devuelva los géneros aceptados*.
+    - Crea un método estático que devuelva los géneros aceptados*.
           - Valida que la calificación sea un número entre 0 y 10 pudiendo ser decimal de una posición.
           - Crea un método que devuelva toda la ficha técnica de la película.
           - Apartir de un arreglo con la información de 3 películas genera 3 instancias de la clase de forma automatizada e imprime la ficha técnica de cada película.
@@ -888,8 +888,19 @@ class Pelicula{
     this.calificacion = calificacion;
 
     this.validarIMDB(id);
-    this.validarTitulo(titulo)
-    this.validarDirector(director)
+    this.validarTitulo(titulo);
+    this.validarDirector(director);
+    this.validarEstreno(estreno);
+    this.validarPais(pais);
+    this.validarGeneros(generos);
+  }
+
+  static get listaGeneros(){
+    return ["Action", "Adult", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Documentary" ,"Drama", "Family", "Fantasy", "Film Noir", "Game-Show", "History", "Horror", "Musical", "Music", "Mystery", "News", "Reality-TV", "Romance", "Sci-Fi", "Short", "Sport", "Talk-Show", "Thriller", "War", "Western"];
+  }
+
+  static generosAceptados(){
+    return console.info(`Los generos aceptados son: ${Pelicula.listaGeneros.join(", ")}`);
   }
   validarCadena(propidad,valor){
     if(!valor) return console.warn(`${propidad} "${valor}" esta vacio`);
@@ -898,7 +909,22 @@ class Pelicula{
   }
   validarLongitudCadena(propidad,valor, longitud){
     if(valor.length > longitud) return console.error(`${propidad} "${valor}" excede el numero de caracteres permitidos (${longitud}).`);
-    
+    return true;
+  }
+
+  validarNumero(propidad,valor){
+    if (!valor) return console.warn(`${propidad} "${valor}" esta vacio`);
+    if (typeof valor !== "number") return console.error(`${propidad} "${valor}" ingresado, NO es un numero`);
+    return true;
+  }
+
+  validarArreglo(propidad,valor){
+    if(!valor) return console.warn(`${propidad} "${valor}" esta vacio`);
+    if(!(valor instanceof Array)) return console.error(`${propidad} "${valor}" ingresado, NO es un arreglo`);
+    if(valor.length === 0) return console.error(`${propidad} "${valor}" NO tiene datos`);
+    for (let cadena of valor){
+      if(typeof cadena !== "string") return console.error(`El valor "${cadena}" ingresado, NO es una cadena de texto`);
+    }
     return true;
   }
 
@@ -915,12 +941,33 @@ class Pelicula{
     if (this.validarCadena("Director", director))
       this.validarLongitudCadena("Director",director,50);
     }
+
+    validarEstreno(estreno){
+      if (this.validarNumero("Año de estreno", estreno))
+        if (!(/^([0-9]){4}$/.test(estreno)))
+          return console.error(`Año de estreno "${estreno}" no es valido, debe ser un numero de 4 digitos`);
+      }
+
+    validarPais(pais){
+      this.validarArreglo("Pais",pais);
+    }
+    validarGeneros(generos){
+      if(this.validarArreglo("Genero",generos)){
+        for(let genero of generos){
+          console.log(genero, Pelicula.listaGeneros.includes(genero));
+        }
+      }
+    }
   }
 
+  Pelicula.generosAceptados();
   const peli= new Pelicula({
     id: "tt1234567",
     titulo: "Titulo de la peli",
-    director: "Director de la peli"
+    director: "Director de la peli",
+    estreno: 2020,
+    pais: ["Mexico", "Francia"],
+    generos: ["comedia", "Humor Negro"]
 
   });
 
