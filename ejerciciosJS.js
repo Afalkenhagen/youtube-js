@@ -868,9 +868,9 @@ console.log("Ejercicios de Lógica de Programación ( 9 / 10 )");
     - Valida que el año de estreno sea un número entero de 4 dígitos.
     - Valida que el país o paises sea introducidos en forma de arreglo.
     - Valida que los géneros sean introducidos en forma de arreglo.
-          - Valida que los géneros introducidos esten dentro de los géneros aceptados*.
+    - Valida que los géneros introducidos esten dentro de los géneros aceptados*.
     - Crea un método estático que devuelva los géneros aceptados*.
-          - Valida que la calificación sea un número entre 0 y 10 pudiendo ser decimal de una posición.
+    - Valida que la calificación sea un número entre 0 y 10 pudiendo ser decimal de una posición.
           - Crea un método que devuelva toda la ficha técnica de la película.
           - Apartir de un arreglo con la información de 3 películas genera 3 instancias de la clase de forma automatizada e imprime la ficha técnica de cada película.
 
@@ -893,6 +893,7 @@ class Pelicula{
     this.validarEstreno(estreno);
     this.validarPais(pais);
     this.validarGeneros(generos);
+    this.validarCalificacion(calificacion)
   }
 
   static get listaGeneros(){
@@ -954,20 +955,35 @@ class Pelicula{
     validarGeneros(generos){
       if(this.validarArreglo("Genero",generos)){
         for(let genero of generos){
-          console.log(genero, Pelicula.listaGeneros.includes(genero));
+          //console.log(genero, Pelicula.listaGeneros.includes(genero));
+          if(!Pelicula.listaGeneros.includes(genero)){
+            console.error (`Genero(s) incorrectos "${generos.join(", ")}"`);
+            Pelicula.generosAceptados();
+          }
         }
       }
     }
+    validarCalificacion(calificacion){
+      if (this.validarNumero("Calificacion", calificacion))
+       return (calificacion < 0 || calificacion > 10)
+        ?console.error ("La calificacion tiene que estar en uun rango entre 0 y 10")
+        :this.calificacion = calificacion.toFixed(1);
+      }
+    fichaTecnica(){
+      console.info(`Ficha tecnica:\nTitulo: `);
+    }
   }
 
-  Pelicula.generosAceptados();
+  //Pelicula.generosAceptados();
   const peli= new Pelicula({
     id: "tt1234567",
     titulo: "Titulo de la peli",
     director: "Director de la peli",
     estreno: 2020,
     pais: ["Mexico", "Francia"],
-    generos: ["comedia", "Humor Negro"]
+    //generos: ["comedia", "Humor Negro", "Sport"]
+    generos: ["comediy", "Sport"],
+    calificacion: 7.789
 
   });
 
