@@ -871,7 +871,7 @@ console.log("Ejercicios de Lógica de Programación ( 9 / 10 )");
     - Valida que los géneros introducidos esten dentro de los géneros aceptados*.
     - Crea un método estático que devuelva los géneros aceptados*.
     - Valida que la calificación sea un número entre 0 y 10 pudiendo ser decimal de una posición.
-          - Crea un método que devuelva toda la ficha técnica de la película.
+    - Crea un método que devuelva toda la ficha técnica de la película.
           - Apartir de un arreglo con la información de 3 películas genera 3 instancias de la clase de forma automatizada e imprime la ficha técnica de cada película.
 
         * Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western.
@@ -970,20 +970,50 @@ class Pelicula{
         :this.calificacion = calificacion.toFixed(1);
       }
     fichaTecnica(){
-      console.info(`Ficha tecnica:\nTitulo: `);
+      console.info(`Ficha tecnica:\nTitulo:"${this.titulo}"\nDirector:"${this.director}"\nAño:"${this.estreno}"\nPais:"${this.pais.join("-")}"\nGeneros:"${this.generos.join(",")}"\nCalificacion:"${this.calificacion}"\nIMDB Id:"${this.id}" `);
     }
   }
 
   //Pelicula.generosAceptados();
-  const peli= new Pelicula({
-    id: "tt1234567",
-    titulo: "Titulo de la peli",
-    director: "Director de la peli",
-    estreno: 2020,
-    pais: ["Mexico", "Francia"],
-    //generos: ["comedia", "Humor Negro", "Sport"]
-    generos: ["comediy", "Sport"],
-    calificacion: 7.789
+  // const peli= new Pelicula({
+  //   id: "tt1234567",
+  //   titulo: "Titulo de la peli",
+  //   director: "Director de la peli",
+  //   estreno: 2020,
+  //   pais: ["Mexico", "Francia"],
+  //   //generos: ["comedia", "Humor Negro", "Sport"]
+  //   generos: ["Comedy", "Sport"],
+  //   calificacion: 7.789
+  // });
+  // peli.fichaTecnica();
 
-  });
-
+const misPelis=[
+  {
+    id:"tt0758758",
+    titulo: "Into te Wild",
+    director: "Sean Penn",
+    estreno: 2007,
+    pais: ["USA"],
+    generos: ["Adventure","Biography","Drama"],
+    calificacion: 8.1
+  },
+  {
+    id:"tt0479143",
+    titulo: "Rocky Balboa",
+    director: "Sylverster Stallone",
+    estreno: 2006,
+    pais: ["USA"],
+    generos: ["Action","Drama", "Sport"],
+    calificacion: 7.1
+  },
+  {
+    id:"tt0468569",
+    titulo: "The Dark Knight",
+    director: "Christoper Nolan",
+    estreno: 2008,
+    pais: ["USA", "UK"],
+    generos: ["Action","Crime","Drama"],
+    calificacion: 9.0
+  }
+];
+misPelis.forEach(el=>new Pelicula(el).fichaTecnica());
