@@ -22,12 +22,18 @@
       console.log("Ejecutando un setInterval, esto se ejecuta indefinidaente cada cierto intervalo de tiempo");
     }, 1000); */
 
-    /* let temporizador = setTimeout(() => {
+     /*
+     setInterval(() => {
+       console.log(new Date().toLocaleTimeString());
+     }, 1000);
+
+    let temporizador = setTimeout(() => {
       console.log(new Date().toLocaleTimeString());
     }, 1000);
 
     clearTimeout(temporizador);
-    console.log("después del clearTimeout"); */
+    console.log("después del clearTimeout");
+    */
 
     /* let temporizador = setInterval(() => {
       console.log(new Date().toLocaleTimeString());
@@ -53,8 +59,8 @@
      Javascript usa un modelo asíncrono y no bloqueante, con un loop de eventos implementado en un sólo hilo, (single thread) para operaciones de entrada y salida (input/output).
      */
 
-
-    /* //Código Síncrono Bloquenate
+    /*
+    //Código Síncrono Bloqueante
     (() => {
       console.log("Código Síncrono");
       console.log("Inicio");
@@ -75,7 +81,7 @@
 
     console.log("********************");
 
-    //Código Asíncrono No Bloquenate
+    //Código Asíncrono No Bloqueante
     (() => {
       console.log("Código Asíncrono");
       console.log("Inicio");
@@ -96,8 +102,8 @@
 
       uno();
       console.log("Fin");
-    })(); */
-
+    })();
+    */
 
 
 
